@@ -4,3 +4,40 @@ const buttons = document.querySelectorAll('.btn');
 const simonPattern = [];
 const userPattern = [];
 const buttonColors = ['red', 'blue', 'green', 'yellow'];
+let start = false;
+let level = 0;
+
+function nextSequence() {
+    userPattern.length = 0;
+    level++;
+    level_title.textContent = 'Level ' + level;
+    const randomNb = Math.floor(Math.random() * 4);
+    const randomColor = buttonColors[randomNb];
+    simonPattern.push(randomColor);
+
+    sequenceAnimation(simonPattern)
+}
+
+function sequenceAnimation(sequence) {
+    let i = 0;
+    const interval = setInterval(function () {
+        animateButton(sequence[i]);
+        playSound(sequence[i]);
+        i++;
+        if (i >= sequence.length) {
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
+function animateButton(color) {
+    const button = document.getElementById(color);
+    button.classList.add('pressed');
+    setTimeout(function () {
+        button.classList.remove('pressed')
+    }, 500);
+}
+
+function playSound(name) {
+    const audio = new Audio('sounds/' + name + '.mp3');
+}
