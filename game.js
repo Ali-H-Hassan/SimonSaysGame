@@ -1,4 +1,4 @@
-//Initialization
+//Initialization of variables
 const level_title = document.getElementById("level-title");
 const buttons = document.querySelectorAll(".btn");
 const simonPattern = [];
@@ -7,6 +7,7 @@ const buttonColors = ["red", "blue", "green", "yellow"];
 let start = false;
 let level = 0;
 
+//Generate the sequence and start
 function nextSequence() {
   userPattern.length = 0;
   level++;
@@ -18,6 +19,7 @@ function nextSequence() {
   sequenceAnimation(simonPattern);
 }
 
+//Animating the sequence
 function sequenceAnimation(sequence) {
   let i = 0;
   const interval = setInterval(function () {
@@ -30,6 +32,7 @@ function sequenceAnimation(sequence) {
   }, 1000);
 }
 
+//Animating the button press
 function animateButton(color) {
   const button = document.getElementById(color);
   button.classList.add("pressed");
@@ -38,6 +41,7 @@ function animateButton(color) {
   }, 500);
 }
 
+//Playing the corresponding sounds for each button correspondingly
 function playSound(name) {
   const audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
@@ -51,6 +55,7 @@ function handleClick(e) {
   checkAnswer(userPattern.length - 1);
 }
 
+//Checking if the user's answer is the same as simon's
 function checkAnswer(level) {
   if (simonPattern[level] === userPattern[level]) {
     if (userPattern.length === simonPattern.length) {
@@ -63,6 +68,7 @@ function checkAnswer(level) {
     gameOver();
   }
 }
+
 function gameOver() {
   level_title.textContent = "Game Over, Press Any Key to Restart";
   start = false;
@@ -73,6 +79,7 @@ buttons.forEach(function (button) {
   button.addEventListener("click", handleClick);
 });
 
+//Start the game when any key is pressed
 document.addEventListener("keydown", function (event) {
   if (!start) {
     start = true;
