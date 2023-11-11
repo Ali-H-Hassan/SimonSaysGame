@@ -68,3 +68,16 @@ function gameOver() {
   start = false;
   simonPattern = false;
 }
+
+buttons.forEach(function (button) {
+  button.addEventListener("click", handleClick);
+});
+
+document.addEventListener("keydown", function (event) {
+  if (!start) {
+    start = true;
+    level = 0;
+    simonPattern.length = 0;
+    nextSequence();
+  }
+});
